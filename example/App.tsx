@@ -26,7 +26,7 @@ const developerToken = KJUR.jws.JWS.sign(
 	privateKey,
 );
 
-const MUSIC_KIT_WEB_CONFIG: MusicKit.Configuration = {
+const MUSIC_KIT_JS_CONFIG: MusicKit.Configuration = {
 	developerToken,
 	app: {
 		name: appName,
@@ -68,7 +68,7 @@ export default function App() {
 	return (
 		<View style={styles.container}>
 			{/* Wrapper enables MusicKit on the web */}
-			<MusicKit.JsProvider configuration={MUSIC_KIT_WEB_CONFIG}>
+			<MusicKit.JsProvider configuration={MUSIC_KIT_JS_CONFIG}>
 				<Demo />
 			</MusicKit.JsProvider>
 		</View>
