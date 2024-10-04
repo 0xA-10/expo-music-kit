@@ -1,0 +1,49 @@
+{
+  "name": "expo-music-kit",
+  "version": "0.1.0",
+  "description": "MusicKit API for RN & Expo. Not affiliated with Apple or Meta.",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module",
+    "open:ios": "open -a \"Xcode\" example/ios",
+    "open:android": "open -a \"Android Studio\" example/android"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "expo-music-kit",
+    "ExpoMusicKit"
+  ],
+  "repository": "https://github.com/anatelli10/expo-music-kit",
+  "bugs": {
+    "url": "https://github.com/anatelli10/expo-music-kit/issues"
+  },
+  "author": "Tony Natelli <tony@natel.li> (github.com/anatelli10)",
+  "license": "MIT",
+  "homepage": "https://github.com/anatelli10/expo-music-kit#readme",
+  "dependencies": {
+    "@expo/webpack-config": "^19.0.0",
+    "jsrsasign": "^10.9.0",
+    "react-dom": "18.2.0",
+    "react-native-web": "~0.19.6"
+  },
+  "devDependencies": {
+    "@types/jsrsasign": "^10.5.12",
+    "@types/musickit-js": "^1.0.8",
+    "@types/react": "^18.0.25",
+    "expo-module-scripts": "^3.0.11",
+    "expo-modules-core": "^1.5.11"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}

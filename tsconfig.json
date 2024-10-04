@@ -1,0 +1,9 @@
+{
+	"extends": "expo-module-scripts/tsconfig.base",
+	"compilerOptions": {
+		"outDir": "./build",
+		"types": ["jest", "jest-require", "musickit-js"]
+	},
+	"include": ["./src"],
+	"exclude": ["**/__mocks__/*", "**/__tests__/*"]
+}
