@@ -1,16 +1,32 @@
-import { Button, Platform, StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
+import { KJUR } from "jsrsasign";
+import { Button, Platform, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
 
-import MusicKit from 'expo-music-kit';
+import MusicKit from "expo-music-kit";
 
-import Player from './Player';
+import Player from "./Player";
 
-import { developerToken } from './secrets';
+import { appIdPrefix, keyId, privateKey } from "./secrets";
 
-export const appName = 'muphoria';
-export const appBuild = '0.0.1';
+export const appName = "muphoria";
+export const appBuild = "0.0.1";
 
-const MUSIC_KIT_CONFIG: MusicKit.Configuration = {
+const developerToken = KJUR.jws.JWS.sign(
+	"ES256",
+	JSON.stringify({
+		alg: "ES256",
+		typ: "JWT",
+		kid: keyId,
+	}),
+	JSON.stringify({
+		iss: appIdPrefix,
+		iat: KJUR.jws.IntDate.get("now"),
+		exp: KJUR.jws.IntDate.get("now + 1day"),
+	}),
+	privateKey,
+);
+
+const MUSIC_KIT_WEB_CONFIG: MusicKit.Configuration = {
 	developerToken,
 	app: {
 		name: appName,
@@ -20,7 +36,7 @@ const MUSIC_KIT_CONFIG: MusicKit.Configuration = {
 };
 
 function Demo() {
-	const [debug, setDebug] = useState('--');
+	const [debug, setDebug] = useState("--");
 	const [isAuthorized, setAuthorized] = useState(MusicKit.isAuthorized());
 
 	const signIn = () => MusicKit.signIn().then((did) => did && setAuthorized(true));
@@ -29,7 +45,7 @@ function Demo() {
 
 	return (
 		<View style={styles.demo}>
-			<Text style={{ fontWeight: 'bold', fontSize: 24 }}>expo-music-kit</Text>
+			<Text style={{ fontWeight: "bold", fontSize: 24 }}>expo-music-kit</Text>
 
 			<View style={styles.readout}>
 				<Text>debug: {debug}</Text>
@@ -39,7 +55,7 @@ function Demo() {
 				{!isAuthorized ? (
 					<Button title="Sign in with Apple Music" onPress={signIn} />
 				) : (
-					Platform.OS === 'web' && <Button title="Sign out" onPress={signOut} />
+					Platform.OS === "web" && <Button title="Sign out" onPress={signOut} />
 				)}
 			</View>
 
@@ -52,7 +68,7 @@ export default function App() {
 	return (
 		<View style={styles.container}>
 			{/* Wrapper enables MusicKit on the web */}
-			<MusicKit.JsProvider configuration={MUSIC_KIT_CONFIG}>
+			<MusicKit.JsProvider configuration={MUSIC_KIT_WEB_CONFIG}>
 				<Demo />
 			</MusicKit.JsProvider>
 		</View>
@@ -62,12 +78,12 @@ export default function App() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#fff',
+		alignItems: "center",
+		justifyContent: "center",
+		backgroundColor: "#fff",
 	},
 	demo: {
-		alignItems: 'center',
+		alignItems: "center",
 		gap: 50,
 	},
 	readout: {
