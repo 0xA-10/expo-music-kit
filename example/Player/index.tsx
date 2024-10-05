@@ -51,7 +51,7 @@ export default function Player({ setDebug }: { setDebug: React.Dispatch<React.Se
 	const queueAndPlay =
 		<Type extends Queueable>(type: Type, name: string) =>
 		async () => {
-			setButtonTitle((title) => `Searching for ${title}...`);
+			setButtonTitle(() => `Searching for ${type} ${name}...`);
 
 			await MusicKit.search([`${type}s`], name)
 				.then(({ [`${type}s` as `${Type}s`]: [firstItem] }) => firstItem.id)
