@@ -1,16 +1,12 @@
-import { Button, StyleSheet, View } from 'react-native';
-import { useState } from 'react';
+import { Button, StyleSheet, View } from "react-native";
+import { useState } from "react";
 
-import MusicKit, { Queueable } from 'expo-music-kit';
+import MusicKit, { Queueable } from "expo-music-kit";
 
-import PlayerButton from './Button';
+import PlayerButton from "./Button";
 
-export default function Player({
-	setDebug,
-}: {
-	setDebug: React.Dispatch<React.SetStateAction<string>>;
-}) {
-	const songTitle = 'take on me';
+export default function Player({ setDebug }: { setDebug: React.Dispatch<React.SetStateAction<string>> }) {
+	const songTitle = "all my exes live in texas";
 	const defaultButtonTitle = `Play "${songTitle}"`;
 
 	const [buttonTitle, setButtonTitle] = useState(defaultButtonTitle);
@@ -19,8 +15,7 @@ export default function Player({
 	const [loopMode, setLoopMode] = useState(MusicKit.loopModeIndex());
 
 	const syncPlayingState = () => setPlaying(() => MusicKit.isPlaying());
-	const syncShuffleState = () =>
-		setShuffleMode(() => MusicKit.shuffleModeIndex());
+	const syncShuffleState = () => setShuffleMode(() => MusicKit.shuffleModeIndex());
 	const syncLoopState = () => setLoopMode(() => MusicKit.loopModeIndex());
 
 	const play = async () => {
@@ -60,7 +55,10 @@ export default function Player({
 
 			await MusicKit.search([`${type}s`], name)
 				.then(({ [`${type}s` as `${Type}s`]: [firstItem] }) => firstItem.id)
-				.then((id) => void setButtonTitle(() => `Q up ${type} ${id}...`) ?? id) // sacrifices were made to keep this one line, i hate myself
+				.then((id) => {
+					setButtonTitle(() => `Queueing up ${type} ${id}...`);
+					return id;
+				})
 				.then(MusicKit.queueUp(type))
 				.then(() => setButtonTitle(() => `Playing ${type}...`))
 				.then(play)
@@ -72,7 +70,7 @@ export default function Player({
 		<View style={styles.player}>
 			<Button
 				title={buttonTitle}
-				onPress={queueAndPlay('song', songTitle)}
+				onPress={queueAndPlay("song", songTitle)}
 				disabled={buttonTitle !== defaultButtonTitle}
 			/>
 
@@ -82,11 +80,7 @@ export default function Player({
 
 				<PlayerButton icon="⏪" onPress={prev} />
 
-				{isPlaying ? (
-					<PlayerButton icon="⏸️" onPress={pause} />
-				) : (
-					<PlayerButton icon="▶️" onPress={play} />
-				)}
+				{isPlaying ? <PlayerButton icon="⏸️" onPress={pause} /> : <PlayerButton icon="▶️" onPress={play} />}
 
 				<PlayerButton icon="⏩" onPress={next} />
 
@@ -98,11 +92,11 @@ export default function Player({
 
 const styles = StyleSheet.create({
 	player: {
-		alignItems: 'center',
+		alignItems: "center",
 		gap: 50,
 	},
 	playerButtons: {
-		flexDirection: 'row',
+		flexDirection: "row",
 		gap: 5,
 	},
 });
