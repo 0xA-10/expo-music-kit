@@ -13,6 +13,8 @@ https://github.com/user-attachments/assets/5a686c0c-17eb-4679-b847-c8e63150e528
 
 > [!WARNING]
 > This package is not yet available on npm.
+> 
+> Also, in the current development-only implementation, **the Web API is loaded through script injection**. This is _probably_ not a great idea for a production application.
 
 From [example/App.tsx](example/App.tsx):
 
