@@ -1,7 +1,7 @@
 # [wip] expo-music-kit
 
 > [!NOTE]
-> This project was not touched for many months and the iOS implementation has stopped working. A patch is in the works 🙃.
+> Updates to Expo and iOS since creating this repo have rendered it incompatible with newer iOS. Recommendation to developers would be to start a fresh Expo Module and migrate over code from this repo, making minor adjustments as necessary.
 
 Apple MusicKit for React Native/Expo. Supports iOS and Web platforms.
 
