@@ -1,4 +1,4 @@
-# [wip] expo-music-kit
+# expo-music-kit
 
 > [!NOTE]
 > Updates to Expo and iOS since creating this repo have rendered it incompatible with newer iOS. Recommendation to developers would be to start a fresh Expo Module and migrate over code from this repo, making minor adjustments as necessary.
